@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const thought = require("./Thought");
+const thoughtSchema = require("./Thought");
 
 const userSchema = new Schema(
     {
@@ -10,12 +10,22 @@ const userSchema = new Schema(
         trim: true,
       },
       email: {
-        type: mongoose.SchemaTypes.Email,
+        type: String,
         required: true,
         unqiue: true,
       },
-      thoughts: [thought],
-      friends: [userSchema],
+      thoughts: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Thought',
+        },
+      ],
+      friends: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+        },
+      ],
     },
     {
       toJSON: {

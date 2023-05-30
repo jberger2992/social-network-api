@@ -2,13 +2,13 @@ const { Thought, User } = require('../models');
 
 module.exports = {
   // Get all Thoughts
-  getApplications(req, res) {
+  getThoughts(req, res) {
     Thought.find()
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
   // Gets a single Thought
-  getSingleApplication(req, res) {
+  getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought
@@ -40,7 +40,7 @@ module.exports = {
       });
   },
   // Updates a Thought
-  updateApplication(req, res) {
+  updateThought(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $set: req.body },
